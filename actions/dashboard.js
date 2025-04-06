@@ -13,23 +13,23 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export const generateAIInsights = async (industry) => {
   const prompt = `
-          Analyze the current state of the ${industry} industry and provide insights in ONLY the following JSON format without any additional notes or explanations:
-          {
-            "salaryRanges": [
-              { "role": "string", "min": number, "max": number, "median": number, "location": "string" }
-            ],
-            "growthRate": number,
-            "demandLevel": "High" | "Medium" | "Low",
-            "topSkills": ["skill1", "skill2", "skill3", "skill4", "skill5"],
-            "marketOutlook": "Positive" | "Neutral" | "Negative",
-            "keyTrends": ["trend1", "trend2", "trend3", "trend4", "trend5"],
-            "recommendedSkills": ["skill1", "skill2", "skill3", "skill4", "skill5"]
-          }
-          
-          IMPORTANT: Return ONLY the JSON. No additional text, notes, or markdown formatting.
-          Include at least 5 common roles for salary ranges.
-          Growth rate should be a percentage.
-        `;
+    Analyze the current state of the ${industry} industry and provide insights in ONLY the following JSON format without any additional notes or explanations:
+    {
+      "salaryRanges": [
+        { "role": "string", "min": number, "max": number, "median": number, "location": "string" }
+      ],
+      "growthRate": number,
+      "demandLevel": "High" | "Medium" | "Low",
+      "topSkills": ["skill1", "skill2", "skill3", "skill4", "skill5"],
+      "marketOutlook": "Positive" | "Neutral" | "Negative",
+      "keyTrends": ["trend1", "trend2", "trend3", "trend4", "trend5"],
+      "recommendedSkills": ["skill1", "skill2", "skill3", "skill4", "skill5"]
+    }
+
+    IMPORTANT: Return ONLY the JSON. No additional text, notes, or markdown formatting.
+    Include at least 5 common roles for salary ranges.
+    Growth rate should be a percentage.
+  `;
 
   try {
     const result = await model.generateContent(prompt);
@@ -74,5 +74,3 @@ export async function getIndustryInsights() {
     throw new Error("Failed to fetch industry insights");
   }
 }
-
-export { generateAIInsights, getIndustryInsights };
